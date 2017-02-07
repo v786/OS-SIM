@@ -11,9 +11,9 @@ int sort(int temp[], int n, int bt[])
 	{
 		if(temp[i] == -1)
 			break;
-		if(bt[temp[i]]<min)
+		if(bt[temp[i]]<minx)
 		{
-			min = bt[temp[i]];
+			minx = bt[temp[i]];
 			ret = temp[i];
 		}
 	}
@@ -36,24 +36,32 @@ int brk (int at[], int n)
 	return ret;
 }
 
+int ip()
+{
+	int n;
+	scanf("%d",&n);
+	return n;
+}
+
 int main()
 {
 	/* code */
 	int n;
 
 	printf("Enter number of process:\n");
-	scanf("%d", &n);
+	n = ip();
 
 	int at[n],bt[n],ct[n],ta[n],wt[n],at2[n];
 	int i,j=0;
+
 	for (i=0;i<n;i++)
 	{
 		printf("For process %d:\n",i);
 		printf("Enter arrival time: ");
-		scanf("%d",&at[i]);
-		at2[i]=at[i];
+		at[i] = ip();
+		at2[i] = at[i];
 		printf("Enter burst time: ");
-		scanf("%d",&bt[i]);
+		bt[i] = ip();
 	}
 
 	int temp[n];
@@ -99,23 +107,25 @@ int main()
 		if( brk(at,n) == 1)
 			break;
 	}
+
 	float wt_avg=0.0,ta_avg=0.0;
+	
 	for (i=0;i<n;i++)
 	{
-		printf("For Process %d:\n",i);
-		printf("Arrival time: %d\n",at2[i]);
-		printf("Burst time: %d\n",bt[i]);
-		printf("Completion time: %d\n",ct[i]);
+		printf("For Process %d: - ",i);
+		printf("Arrival time: %d - ",at2[i]);
+		printf("Burst time: %d - ",bt[i]);
+		printf("Completion time: %d - ",ct[i]);
 		
 		ta[i]=ct[i]-at2[i];
 		ta_avg=ta_avg+ta[i];
 		
-		printf("Turnaround time: %d\n",ta[i]);
+		printf("Turnaround time: %d - ",ta[i]);
 		
 		wt[i]=ta[i]-bt[i];
 		wt_avg=wt_avg+wt[i];
 		
-		printf("Waiting time: %d\n",wt[i]);
+		printf("Waiting time: %d.\n",wt[i]);
 	}
 
 	printf("Average waiting time: %f\n",wt_avg/n);

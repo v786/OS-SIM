@@ -5,22 +5,29 @@
 
 int minx (int arrivaltime[], int n) // Function to return index of First arrivaltime
 {
-	int i,j,minx;
+	int i,j,mint;
 
 	int ind = 0;
 
-	minx = 1000; // initialise min with high value
+	mint = 1000; // initialise min with high value
 
 	for (i=0; i<n; i++)
 	{
-		if(arrivaltime[i] < minx)
+		if(arrivaltime[i] < mint)
 		{
 			ind = i;
-			minx = arrivaltime[i];
+			mint = arrivaltime[i];
 		}
 	}
 
 	return ind;
+}
+
+int ip()
+{
+	int n;
+	scanf("%d",&n);
+	return n;
 }
 
 int main()
@@ -36,19 +43,19 @@ int main()
 	for (i=0;i<n;i++)
 	{
 		printf("Enter arrival time of process %d:",i);
-		scanf("%d",&arrivaltime[i]);
+		arrivaltime[i] = ip();
 		arrivaltime2[i]=arrivaltime[i];
 	}
 
 	for (i=0;i<n;i++)
 	{
 		printf("Enter burst time of process %d:",i);
-		scanf("%d",&bursttime[i]);
+		bursttime[i] = ip();
 	}
 
 	for (i=0;i<n;i++)
 	{
-		j=ind(arrivaltime,n);
+		j=minx(arrivaltime,n);
 		if (arrivaltime[j]>t)
 		{
 			t=arrivaltime[j]+bursttime[j];
@@ -61,24 +68,24 @@ int main()
 		arrivaltime[j]=5000;
 	}
 
-	float arrivaltime wait_time_avg=0.0,turn_around_time_avg=0.0;
+	float wait_time_avg=0.0, turn_around_time_avg=0.0;
 
 	for (i=0;i<n;i++)
 	{
-		printf("For Process %d:\n",i);
-		printf("Arrival time: %d\n",arrivaltime2[i]);
-		printf("burst time: %d\n",bursttime[i]);
-		printf("completion time: %d\n",completion_time[i]);
+		printf("\nFor Process %d:\n",i);
+		printf("Arrival time: %d ,",arrivaltime2[i]);
+		printf("burst time: %d ,",bursttime[i]);
+		printf("completion time: %d ,",completion_time[i]);
 		turn_around_time[i]=completion_time[i]-arrivaltime2[i];
 		turn_around_time_avg=turn_around_time_avg+turn_around_time[i];
-		printf("turnaround time: %d\n",turn_around_time[i]);
+		printf("turnaround time: %d ,",turn_around_time[i]);
 		wait_time[i]=turn_around_time[i]-bursttime[i];
 		wait_time_avg=wait_time_avg+wait_time[i];
-		printf("waiting time: %d\n",wait_time[i]);
+		printf("waiting time: %d .",wait_time[i]);
 	}
 
-	printf("Average waiting time: %f\n",wait_time_avg/n);
-	printf("Average turnaround time: %f\n",turn_around_time_avg/n);
+	printf("\nAverage waiting time: %f\n",wait_time_avg/n);
+	printf("\nAverage turnaround time: %f\n",turn_around_time_avg/n);
 
 	return 0;
 }
